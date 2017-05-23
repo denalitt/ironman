@@ -28,7 +28,7 @@ def main():
 
     results = {}
     results['response'] = []
-    results['response']['msg'] = "ALL GOOD HERE"
+    results['response'].append("ALL GOOD HERE")
 
     module.exit_json(**results)
 
