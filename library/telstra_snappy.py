@@ -9,6 +9,10 @@ EXAMPLE='''
 EXAMPEL GOES HERE
 '''
 
+from jnpr.jsnapy import SnapAdmin
+from pprint import pprint
+from jnpr.junos import Device
+
 
 def main():
 
@@ -27,8 +31,15 @@ def main():
     )
 
     results = {}
-    results['response'] = []
-    results['response'].append("ALL GOOD HERE")
+
+    js = SnapAdmin()
+    snapchk = js.snapcheck(config_data, "pre")
+    for val in snapchk:
+        results['device'] = val.device
+        results['result'] = val.result
+        results['no_passed'] = val.no_passed
+        results['no_failed'] = val.no_failed
+        results['test_results'] = val.test_results
 
     module.exit_json(**results)
 
