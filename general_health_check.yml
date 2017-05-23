@@ -7,8 +7,10 @@
   - name: Telstra Snappy
     telstra_snappy:
       device: "{{ host }}"
-      username: cisco
-      passwd: cisco
+      username: denali
+      passwd: denali11
       platform: junos
       tests:
          - test123.yml
+    register: test_result
+  - debug: var=test_result
