@@ -4,12 +4,11 @@
   connection: local
   tasks:
   - debug: var="{{ host }}"
-  - name: Telstra Snappy
-    telstra_snappy:
+  - name: Junos JSNAPy
+    junos_snapy:
       device: "{{ host }}"
       username: denali
       passwd: denali11
-      platform: junos
       tests:
          - tests_lab_state.yml
     register: test_result

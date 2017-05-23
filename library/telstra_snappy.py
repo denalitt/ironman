@@ -30,11 +30,24 @@ def main():
         supports_check_mode=False
     )
 
-    config_data = {}
-    config_data['hosts'][0]['device'] = module.params['device']
-    config_data['hosts'][0]['username'] = module.params['username']
-    config_data['hosts'][0]['passwd'] = module.params['passwd']
-    config_data['tests'] = module.params['tests']
+#    config_data = {}
+#    config_data['hosts'] = []
+#    thishost = {}
+#    thishost['device'] = module.params['device']
+#    thishost['username'] = module.params['username']
+#    thishost['passwd'] = module.params['passwd']
+#    config_data['hosts'].append(thishost)
+#    config_data['tests'] = module.params['tests']
+#    print config_data
+    config_data = """
+    hosts:
+      - device: 12.13.14.9
+        username : denali
+        passwd: denali11
+    tests:
+      - tests_lab_state.yml
+    """
+    print config_data
 
     js = SnapAdmin()
     snapchk = js.snapcheck(config_data, "pre")
