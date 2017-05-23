@@ -30,10 +30,14 @@ def main():
         supports_check_mode=False
     )
 
-    results = {}
+    config_data['hosts'][0]['device'] = module.params['device']
+    config_data['hosts'][0]['username'] = module.params['username']
+    config_data['hosts'][0]['passwd'] = module.params['passwd']
+    config_data['tests'] = module.params['tests']
 
     js = SnapAdmin()
     snapchk = js.snapcheck(config_data, "pre")
+    results = {}
     for val in snapchk:
         results['device'] = val.device
         results['result'] = val.result
