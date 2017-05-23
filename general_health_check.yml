@@ -2,8 +2,6 @@
 - hosts: localhost
   gather_facts: no
   connection: local
-  roles:
-    - Juniper.junos
   tasks:
   - debug: var="{{ host }}"
   - name: Junos JSNAPy
