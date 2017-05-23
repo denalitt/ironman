@@ -7,7 +7,7 @@
   - name: Junos JSNAPy
     junos_jsnapy:
       host: "{{ host }}"
-      username: denali
+      user: denali
       passwd: denali11
       test_files:
          - tests_lab_state.yml
