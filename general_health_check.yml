@@ -4,3 +4,11 @@
   connection: local
   tasks:
   - debug: var="{{ host }}"
+  - name: Telstra Snappy
+    telstra_snappy:
+      device: "{{ host }}"
+      username: cisco
+      passwd: cisco
+      platform: junos
+      tests:
+         - test123.yml
