@@ -3,7 +3,6 @@
   gather_facts: no
   connection: local
   tasks:
-  - debug: var=host
   - name: Junos JSNAPy
     junos_jsnapy:
       host: "{{ host }}"
