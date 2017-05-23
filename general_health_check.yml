@@ -10,6 +10,7 @@
       user: denali
       passwd: denali11
       action: snap_pre
+      dir: ./
       test_files:
          - tests_lab_state.yml
     register: test_result
