@@ -6,10 +6,10 @@
   - debug: var="{{ host }}"
   - name: Junos JSNAPy
     junos_jsnapy:
-      device: "{{ host }}"
+      host: "{{ host }}"
       username: denali
       passwd: denali11
-      tests:
+      test_files:
          - tests_lab_state.yml
     register: test_result
   - debug: var=test_result
