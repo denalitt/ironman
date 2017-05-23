@@ -5,7 +5,7 @@
   tasks:
   - debug: var="{{ host }}"
   - name: Junos JSNAPy
-    junos_snapy:
+    junos_jsnapy:
       device: "{{ host }}"
       username: denali
       passwd: denali11
