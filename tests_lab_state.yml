@@ -1,0 +1,60 @@
+---
+
+tests_include:
+  - test_bgp_group_ibgp
+  - test_interfaces
+
+test_bgp_group_ibgp:
+  # Works.
+  - command: show bgp neighbor 172.20.20.0
+  - iterate:
+      xpath: '/bgp-information/bgp-peer'
+      tests:
+        - contains: peer-address, 172.20.20.0+           # element in which test is performed
+        # - is-equal: peer-address, 144.133.160.7+179    # element in which test is performed
+        # - regexp: peer-address, 144.133.160.7+179      # element in which test is performed
+          err: "Test Failed! peer-address got changed, it is now <{{post['peer-address']}}>"
+          info: "Test succeeded! peer-address is equal to <{{post['peer-address']}}>"
+
+        - is-equal: peer-state, Established
+          err: "Test Failed! peer-state is now <{{post['peer-state']}}>"
+          info: "Test succeeded! peer-state is equal to <{{post['peer-state']}}>"
+
+        - in-range: peer-as, 65500,65530      # element in which test is performed
+          err: "Test Failed! peer-as is not in range of 100-200, it is: <{{post['peer-as']}}>"
+          info: "Test succeeded! peer-as is in range of 100-200, it is now <{{post['peer-as']}}>"
+
+        - is-equal: peer-group, iBGP
+          err: "Test Failed! peer-group is now <{{post['peer-group']}}>"
+          info: "Test succeeded! peer-group is equal to <{{post['peer-group']}}>"
+
+  - iterate:
+      xpath: '//bgp-information/bgp-peer/bgp-option-information'
+      tests:
+        - is-gt: holdtime, 80       # element in which test is performed
+          err: "Test Failed!! holdtime is not greater than 80, it is: <{{post['holdtime']}}>"
+          info: "Test succeeded!! holdtime is greater than 80, it is: <{{post['holdtime']}}>"
+
+        - is-lt: preference, 171      # element in which test is performed
+          err: "Test Failed!! preference is not less than 10, <{{post['preference']}}>"
+          info: "Test succeeded!! preference is less than 10, <{{post['preference']}}>"
+
+        - is-equal: bgp-options, Preference LocalAddress AddressFamily Rib-group Refresh
+          err: "Test Failed!! bgp-options: <{{post['bgp-options']}}>"
+          info: "Test succeeded!! bgp-options: <{{post['bgp-options']}}>"
+
+        - is-equal: address-families, inet-vpn-unicast inet6-vpn-unicast route-target inet-mvpn inet6-mvpn evpn l2vpn-signaling
+          err: "Test Failed!! address-families: <{{post['address-families']}}>"
+          info: "Test succeeded!! address-families: <{{post['address-families']}}>"
+
+test_interfaces:
+  # Works.
+  - command: show interfaces ge-0/0/0
+  - iterate:
+      xpath: '//physical-interface'
+      id: './name'
+      tests:
+        - is-equal: oper-status, up       # element in which test is performed
+          err: "Test Failed!! oper-status is <{{post['oper-status']}}>"
+          info: "Test Failed!! oper-status is <{{post['oper-status']}}>"
+
