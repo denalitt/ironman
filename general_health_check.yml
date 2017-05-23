@@ -9,7 +9,7 @@
       host: "{{ host }}"
       user: denali
       passwd: denali11
-      action: snapcheck
+      action: snap_pre
       test_files:
          - tests_lab_state.yml
     register: test_result
