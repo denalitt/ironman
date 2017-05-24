@@ -6,7 +6,7 @@ tests_include:
 
 test_bgp_group_ibgp:
   # Works.
-  - command: show bgp neighbor 172.20.20.0
+  - command: show bgp neighbor
   - iterate:
       xpath: '/bgp-information/bgp-peer'
       tests:
@@ -16,18 +16,18 @@ test_bgp_group_ibgp:
           err: "Test Failed! peer-address got changed, it is now <{{post['peer-address']}}>"
           info: "Test succeeded! peer-address is equal to <{{post['peer-address']}}>"
 
-        - is-equal: peer-state, Established
-          err: "Test Failed! peer-state is now <{{post['peer-state']}}>"
-          info: "Test succeeded! peer-state is equal to <{{post['peer-state']}}>"
-
-        - in-range: peer-as, 65500,65530      # element in which test is performed
-          err: "Test Failed! peer-as is not in range of 100-200, it is: <{{post['peer-as']}}>"
-          info: "Test succeeded! peer-as is in range of 100-200, it is now <{{post['peer-as']}}>"
-
-        - is-equal: peer-group, iBGP
-          err: "Test Failed! peer-group is now <{{post['peer-group']}}>"
-          info: "Test succeeded! peer-group is equal to <{{post['peer-group']}}>"
-
+#        - is-equal: peer-state, Established
+#          err: "Test Failed! peer-state is now <{{post['peer-state']}}>"
+#          info: "Test succeeded! peer-state is equal to <{{post['peer-state']}}>"
+#
+#        - in-range: peer-as, 65500,65530      # element in which test is performed
+#          err: "Test Failed! peer-as is not in range of 100-200, it is: <{{post['peer-as']}}>"
+#          info: "Test succeeded! peer-as is in range of 100-200, it is now <{{post['peer-as']}}>"
+#
+#        - is-equal: peer-group, iBGP
+#          err: "Test Failed! peer-group is now <{{post['peer-group']}}>"
+#          info: "Test succeeded! peer-group is equal to <{{post['peer-group']}}>"
+#
   - iterate:
       xpath: '//bgp-information/bgp-peer/bgp-option-information'
       tests:
