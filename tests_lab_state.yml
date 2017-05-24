@@ -52,7 +52,7 @@ test_interfaces:
   - command: show interfaces ge-0/0/0
   - iterate:
       xpath: '//physical-interface'
-      id: './name'
+      id: 'name'
       tests:
         - is-equal: oper-status, up       # element in which test is performed
           err: "Test Failed!! oper-status is <{{post['oper-status']}}>"
