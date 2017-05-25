@@ -10,15 +10,15 @@
 
   - name: Junos JSNAPy
     junos_jsnapy:
-      host: "{{ item }}"
+      host: "{{ item[0] }}"
       user: denali
       passwd: denali11
       action: snapcheck
       dir: /tmp/testcases
       test_files:
-         - "{{ op }}"
-  #       - "{{ config }}"
+         - "{{ item[1] }}"
     register: test_result
-    with_items:
+    with_nested:
          - "{{ hosts }}"
+         - "{{ op }}"
   - debug: var=test_result.results
