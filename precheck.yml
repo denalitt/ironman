@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: Junos JSNAPy
+    junos_jsnapy:
+      host: "{{ host }}"
+      user: denali
+      passwd: denali11
+      action: snapcheck
+      dir: ./
+      test_files:
+         - tests_lab_state.yml
+    register: test_result
+  - debug: var=test_result
