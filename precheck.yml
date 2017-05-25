@@ -20,5 +20,5 @@
     register: test_result
     with_nested:
          - "{{ hosts }}"
-         - "{{ op }}"
+         - "{{ op  + config }}"
   - debug: var=test_result.results
