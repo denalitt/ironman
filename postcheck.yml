@@ -32,5 +32,5 @@
     with_nested:
          - "{{ hosts }}"
          - "{{ op  + config }}"
-    register: check_result['results']
+    register: check_result
   - debug: var=check_result['results']
