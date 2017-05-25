@@ -19,7 +19,7 @@
          - "{{ item[1] }}"
     register: test_result
     with_nested:
-         - "{{ hosts }}"
-         - "{{ op  + config }}"
+         - "{{ devices }}"
+         - "{{ op  + config + user_defined }}"
   - debug: msg="This is just to push the next task to index 3 to level with postcheck.yml"
   - debug: var=test_result['results']

@@ -18,8 +18,8 @@
       test_files:
          - "{{ item[1] }}"
     with_nested:
-         - "{{ hosts }}"
-         - "{{ op  + config }}"
+         - "{{ devices }}"
+         - "{{ op  + config + user_defined }}"
   - name: Junos JSNAPy Compare PRE and POST 
     junos_jsnapy:
       host: "{{ item[0] }}"
@@ -30,7 +30,7 @@
       test_files:
          - "{{ item[1] }}"
     with_nested:
-         - "{{ hosts }}"
-         - "{{ op  + config }}"
+         - "{{ devices }}"
+         - "{{ op  + config + user_defined }}"
     register: check_result
   - debug: var=check_result['results']
