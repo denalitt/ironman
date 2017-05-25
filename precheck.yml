@@ -17,7 +17,7 @@
       dir: /tmp/testcases
       test_files:
          - "{{ op }}"
-         - "{{ config }}"
+  #       - "{{ config }}"
     register: test_result
     with_items:
          - "{{ hosts }}"
