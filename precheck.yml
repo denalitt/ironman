@@ -13,7 +13,7 @@
       host: "{{ item[0] }}"
       user: denali
       passwd: denali11
-      action: snapcheck
+      action: snap_pre
       dir: /tmp/testcases
       test_files:
          - "{{ item[1] }}"
