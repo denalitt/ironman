@@ -3,10 +3,9 @@
   gather_facts: no
   connection: local
   tasks:
-  - debug: var=hosts
   - name: Junos JSNAPy
     junos_jsnapy:
-      host: "{{ item.key }}"
+      host: "{{ item }}"
       user: denali
       passwd: denali11
       action: snapcheck
