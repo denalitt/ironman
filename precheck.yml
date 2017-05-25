@@ -16,8 +16,8 @@
       action: snapcheck
       dir: /tmp/testcases
       test_files:
-         - "op/test_{{ op }}.yml"
-         - "config/test_{{ config }}.yml"
+         - "{{ op }}"
+         - "{{ config }}"
     register: test_result
     with_items:
          - "{{ hosts }}"
