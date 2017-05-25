@@ -8,18 +8,29 @@
          dest="/tmp/testcases"
          force=yes
 
-  - name: Junos JSNAPy
+  - name: Junos JSNAPy Post Check
     junos_jsnapy:
       host: "{{ item[0] }}"
       user: denali
       passwd: denali11
-      action: snap_pre
+      action: snap_post
       dir: /tmp/testcases
       test_files:
          - "{{ item[1] }}"
-    register: test_result
     with_nested:
          - "{{ hosts }}"
          - "{{ op  + config }}"
-  - debug: msg="This is just to push the next task to index 3 to level with postcheck.yml"
+  - name: Junos JSNAPy Compare PRE and POST 
+    junos_jsnapy:
+      host: "{{ item[0] }}"
+      user: denali
+      passwd: denali11
+      action: check
+      dir: /tmp/testcases
+      test_files:
+         - "{{ item[1] }}"
+    with_nested:
+         - "{{ hosts }}"
+         - "{{ op  + config }}"
+    register: check_result['results']
   - debug: var=test_result['results']
