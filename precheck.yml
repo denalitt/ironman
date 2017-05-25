@@ -3,15 +3,21 @@
   gather_facts: no
   connection: local
   tasks:
+  - name: Download testcases from GIT
+    git: repo="https://github.com/denalitt/testcases.git"
+         dest="/tmp/testcases"
+         force=yes
+
   - name: Junos JSNAPy
     junos_jsnapy:
       host: "{{ item }}"
       user: denali
       passwd: denali11
       action: snapcheck
-      dir: ./
+      dir: /tmp/testcases
       test_files:
-         - tests_lab_state.yml
+         - "op/{{ op }}"
+         - "config/{{ config }}"
     register: test_result
     with_items:
          - "{{ hosts }}"
