@@ -5,7 +5,7 @@
   tasks:
   - name: Junos JSNAPy
     junos_jsnapy:
-      host: "{{ host }}"
+      host: "{{ item.key }}"
       user: denali
       passwd: denali11
       action: snapcheck
@@ -13,4 +13,6 @@
       test_files:
          - tests_lab_state.yml
     register: test_result
+    with_items:
+         - "{{ hosts }}"
   - debug: var=test_result
