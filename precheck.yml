@@ -21,4 +21,4 @@
     with_nested:
          - "{{ hosts }}"
          - "{{ op  + config }}"
-  - debug: var=test_result.results
+  - debug: var=test_result
