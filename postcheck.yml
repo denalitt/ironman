@@ -33,4 +33,4 @@
          - "{{ hosts }}"
          - "{{ op  + config }}"
     register: check_result['results']
-  - debug: var=test_result['results']
+  - debug: var=check_result['results']
