@@ -1,0 +1,25 @@
+---
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  tasks:
+  - name: Download testcases from GIT
+    git: repo="https://github.com/denalitt/testcases.git"
+         dest="/tmp/testcases"
+         force=yes
+
+  - name: Junos JSNAPy
+    junos_jsnapy:
+      host: "{{ item[0] }}"
+      user: denali
+      passwd: denali11
+      action: snapcheck
+      dir: /tmp/testcases
+      test_files:
+         - "{{ item[1] }}"
+    register: test_result
+    with_nested:
+         - "{{ devices }}"
+         - "{{ op  + config + user_defined }}"
+  - debug: msg="This is just to push the next task to index 3 to level with postcheck.yml"
+  - debug: var=test_result['results']
