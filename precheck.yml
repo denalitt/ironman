@@ -15,4 +15,4 @@
     register: test_result
     with_items:
          - "{{ hosts }}"
-  - debug: var=test_result
+  - debug: var=test_result.results
